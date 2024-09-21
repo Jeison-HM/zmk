@@ -162,6 +162,13 @@ jobs:
           then
             cp "${{ env.build_dir }}/zephyr/zmk.${{ inputs.fallback_binary }}" "${{ env.build_dir }}/artifacts/${{ env.artifact_name }}.${{ inputs.fallback_binary }}"
           fi
+          if [ -f "${{ env.build_dir }}/zephyr/zephyr.elf" ]
+          then
+            cp "${{ env.build_dir }}/zephyr/zephyr.elf" "${{ env.build_dir }}/artifacts/${{ env.artifact_name }}.elf"
+          elif [ -f "${{ env.build_dir }}/zephyr/zmk.elf" ]
+          then
+            cp "${{ env.build_dir }}/zephyr/zmk.elf" "${{ env.build_dir }}/artifacts/${{ env.artifact_name }}.elf"
+          fi
 
       - name: Archive (${{ env.display_name }})
         uses: actions/upload-artifact@v4
